@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     private UserRepository repository;
 
-    @RequestMapping(value = "/users",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/users",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public List<User> findAll() {
         List<User> users;
@@ -32,32 +32,43 @@ public class UserController {
             return null;
         }
     }
-    @RequestMapping("/create")
+    @RequestMapping(value = "/getbyid",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public String create(String email, String name) {
+    public User getById(long id) {
+        try {
+            User user = repository.findOne(id);
+            return user;
+        }
+        catch (Exception ex) {
+            return null;
+        }
+    }
+    @RequestMapping(value = "/create",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public User create(String email, String name) {
         User user;
         try {
             user = new User(email, name);
             repository.save(user);
+            return user;
         }
         catch (Exception ex) {
-            return "Error creating the user: " + ex.toString();
+            return null;
         }
-        return "User succesfully created! (id = " + user.getId() + ")";
     }
-    @RequestMapping("/delete")
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public String delete(long id) {
+    public User delete(long id) {
         try {
             User user = new User(id);
             repository.delete(user);
+            return user;
         }
         catch (Exception ex) {
-            return "Error deleting the user:" + ex.toString();
+            return null;
         }
-        return "User succesfully deleted!";
     }
-    @RequestMapping("/get-by-email")
+    @RequestMapping(value = "/get-by-email",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String getByEmail(String email) {
         String userId;
@@ -70,18 +81,18 @@ public class UserController {
         }
         return "The user id is: " + userId;
     }
-    @RequestMapping("/update")
+    @RequestMapping(value = "/update", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public String updateUser(long id, String email, String name) {
+    public User updateUser(long id, String email, String name) {
         try {
             User user = repository.findOne(id);
             user.setEmail(email);
             user.setName(name);
             repository.save(user);
+            return user;
         }
         catch (Exception ex) {
-            return "Error updating the user: " + ex.toString();
+            return null;
         }
-        return "User succesfully updated!";
     }
 }

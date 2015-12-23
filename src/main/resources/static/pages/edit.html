@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="page-header">
+        <h1>{{title}}</h1>
+    </div>
+    <form name="userFrom">
+        <div class="control-group">
+            <label class="control-label">Name</label>
+            <div class="controls">
+                <input type="text" name="name" data-ng-model="user.name" autofocus required/>
+                <span data-ng-show="userFrom.name.$error.required">Username is required.</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Email</label>
+            <div class="controls">
+                <input name="email" type="email" data-ng-model="user.email" required/>
+                <span data-ng-show="userFrom.email.$error.required">Email is required.</span>
+                <span data-ng-show="userFrom.email.$error.email">Invalid email address.</span>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a data-ng-click="save()" class="btn btn-primary">Save</a>
+            <a href="#/" class="btn">Cancel</a>
+        </div>
+    </form>
+</div>
