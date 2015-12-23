@@ -6,13 +6,13 @@
     <table class="table table-striped" >
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Description</th>
+            <th data-ng-click="ord='name'">{{nameHeader}}</th>
+            <th data-ng-click="ord='email'">{{emailHeader}}</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr data-ng-repeat="user in users">
+        <tr data-ng-repeat="user in users | orderBy:ord | startFrom:currentPage*pageSize | limitTo:pageSize ">
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>
@@ -22,5 +22,14 @@
         </tr>
         </tbody>
     </table>
+    <div style="margin: 0px 36%;">
+        <button data-ng-disabled="currentPage == 0" data-ng-click="currentPage=currentPage-1" class="btn">
+            Previous
+        </button>
+        {{currentPage+1}}/{{numberOfPages()}}
+        <button data-ng-disabled="currentPage >= users.length/pageSize - 1" data-ng-click="currentPage=currentPage+1" class="btn">
+            Next
+        </button>
+    </div>
     <a href="#/new" class="btn btn-primary">New</a>
 </div>

@@ -16,6 +16,14 @@ app.config(function($routeProvider) {
         .otherwise({redirectTo: "/"});
 });
 app.controller('userController', function($scope, $http) {
+    $scope.ord = 'name';
+    $scope.nameHeader = 'Name';
+    $scope.emailHeader = 'Email';
+    $scope.currentPage = 0;
+    $scope.pageSize = 5;
+    $scope.numberOfPages=function(){
+        return Math.ceil($scope.users.length/$scope.pageSize);
+    }
     $http.get('/users').
     success(function(data) {
         $scope.users = data;
@@ -53,37 +61,9 @@ app.controller('editController', function($scope, $http, $location, $routeParams
         });
     }
 });
-/*
-
-function EditCtrl($scope, $location, $routeParams) {
-    $scope.title = "Edit Crew";
-
-    $scope.person = $scope.crew[$routeParams.id];
-    $scope.save = function() {
-        $location.path("/");
+app.filter('startFrom', function() {
+    return function(input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
     }
-}
-
-function NewCtrl($scope, $location) {
-    $scope.title = "New Crew";
-
-    $scope.person = {name: "", description: ""};
-    $scope.save = function() {
-        $scope.crew.push($scope.person);
-        $location.path("/");
-    }
-}
-
-function AppCtrl($scope, $location, $http){
-    $http.get('/users').
-    success(function(data) {
-        $scope.users = data;
-    });
-
-    $scope.destroy = function() {
-        if (confirm("Are you sure?")) {
-            $scope.crew.splice(self.id, 1);
-            $location.path("/");
-        }
-    };
-}*/
+});

@@ -36,8 +36,7 @@ public class UserController {
     @ResponseBody
     public User getById(long id) {
         try {
-            User user = repository.findOne(id);
-            return user;
+            return repository.findOne(id);
         }
         catch (Exception ex) {
             return null;
