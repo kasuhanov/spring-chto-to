@@ -44,10 +44,10 @@ public class UserController {
     }
     @RequestMapping(value = "/create",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public User create(String email, String name) {
+    public User create(String email, String name, long age) {
         User user;
         try {
-            user = new User(email, name);
+            user = new User(email, name, age);
             repository.save(user);
             return user;
         }
@@ -82,11 +82,12 @@ public class UserController {
     }
     @RequestMapping(value = "/update", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public User updateUser(long id, String email, String name) {
+    public User updateUser(long id, String email, String name, long age) {
         try {
             User user = repository.findOne(id);
             user.setEmail(email);
             user.setName(name);
+            user.setAge(age);
             repository.save(user);
             return user;
         }

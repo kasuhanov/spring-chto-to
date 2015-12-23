@@ -7,6 +7,7 @@
         <thead>
         <tr>
             <th data-ng-click="ord='name'">{{nameHeader}}</th>
+            <th data-ng-click="ord='age'">{{ageHeader}}</th>
             <th data-ng-click="ord='email'">{{emailHeader}}</th>
             <th>Action</th>
         </tr>
@@ -14,6 +15,7 @@
         <tbody>
         <tr data-ng-repeat="user in users | orderBy:ord | startFrom:currentPage*pageSize | limitTo:pageSize ">
             <td>{{user.name}}</td>
+            <td>{{user.age}}</td>
             <td>{{user.email}}</td>
             <td>
                 <a href="#/edit/{{user.id}}" class="btn btn-mini">Edit</a>
@@ -22,7 +24,7 @@
         </tr>
         </tbody>
     </table>
-    <div style="margin: 0px 36%;">
+    <div style="margin: 0 36%;">
         <button data-ng-disabled="currentPage == 0" data-ng-click="currentPage=currentPage-1" class="btn">
             Previous
         </button>

@@ -11,13 +11,14 @@ public class User {
     @SequenceGenerator(name="my_entity_seq_gen", sequenceName="users_seq")
     private long id;
 
-    // The user's email
     @NotNull
     private String email;
 
-    // The user's name
     @NotNull
     private String name;
+
+    @NotNull
+    private long age;
 
     public User() { }
 
@@ -25,9 +26,10 @@ public class User {
         this.id = id;
     }
 
-    public User(String email, String name) {
+    public User(String email, String name,long age) {
         this.email = email;
         this.name = name;
+        this.age = age;
     }
 
     public long getId() {
@@ -54,4 +56,11 @@ public class User {
         this.name = value;
     }
 
+    public long getAge() {
+        return age;
+    }
+
+    public void setAge(long age) {
+        this.age = age;
+    }
 }
