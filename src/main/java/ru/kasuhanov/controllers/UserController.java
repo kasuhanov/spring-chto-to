@@ -3,7 +3,6 @@ package ru.kasuhanov.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,77 +21,37 @@ public class UserController {
     @RequestMapping(value = "/users",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public List<User> findAll() {
-        List<User> users;
-        try {
-            users = new ArrayList<>();
-            repository.findAll().forEach(users::add);
-            return users;
-        }
-        catch (Exception ex) {
-            return null;
-        }
+        List<User> users = new ArrayList<>();
+        repository.findAll().forEach(users::add);
+        return users;
     }
     @RequestMapping(value = "/getbyid",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public User getById(long id) {
-        try {
-            return repository.findOne(id);
-        }
-        catch (Exception ex) {
-            return null;
-        }
+        return repository.findOne(id);
     }
     @RequestMapping(value = "/create",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public User create(String email, String name, long age) {
-        User user;
-        try {
-            user = new User(email, name, age);
-            repository.save(user);
-            return user;
-        }
-        catch (Exception ex) {
-            return null;
-        }
+        User user = new User(email, name, age);
+        repository.save(user);
+        return user;
     }
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public User delete(long id) {
-        try {
-            User user = new User(id);
-            repository.delete(user);
-            return user;
-        }
-        catch (Exception ex) {
-            return null;
-        }
-    }
-    @RequestMapping(value = "/get-by-email",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    public String getByEmail(String email) {
-        String userId;
-        try {
-            User user = repository.findByEmail(email);
-            userId = String.valueOf(user.getId());
-        }
-        catch (Exception ex) {
-            return "User not found";
-        }
-        return "The user id is: " + userId;
+        User user = new User(id);
+        repository.delete(user);
+        return user;
     }
     @RequestMapping(value = "/update", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public User updateUser(long id, String email, String name, long age) {
-        try {
-            User user = repository.findOne(id);
-            user.setEmail(email);
-            user.setName(name);
-            user.setAge(age);
-            repository.save(user);
-            return user;
-        }
-        catch (Exception ex) {
-            return null;
-        }
+        User user = repository.findOne(id);
+        user.setEmail(email);
+        user.setName(name);
+        user.setAge(age);
+        repository.save(user);
+        return user;
     }
 }
