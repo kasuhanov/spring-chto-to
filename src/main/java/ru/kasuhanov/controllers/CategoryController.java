@@ -10,7 +10,6 @@ import ru.kasuhanov.Dao.CategoryRepository;
 import ru.kasuhanov.model.Category;
 import ru.kasuhanov.model.Purchase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -21,21 +20,12 @@ public class CategoryController {
 
     @RequestMapping(value = "/getall",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public List<Category> findAll() {
-        List<Category> categories = new ArrayList<>();
-        repository.findAll().forEach(categories::add);
-        return categories;
+    public Iterable<Category> findAll() {
+        return repository.findAll();
     }
     @RequestMapping(value = "/getpurchases",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public List<Purchase> getPurchases(long id) {
         return repository.findOne(id).getPurchases();
-    }
-    @RequestMapping(value = "/create",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    public Category create(String name) {
-        Category category = new Category(name);
-        repository.save(category);
-        return category;
     }
 }
