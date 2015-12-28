@@ -1,4 +1,4 @@
-package ru.kasuhanov.model;
+package su.asgor.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,10 +13,14 @@ public class Purchase {
     private long id;
     @NotNull
     private String name;
-    @Column(name = "startTime")
+    @Column(name = "start_time")
     @Temporal(TemporalType.DATE)
     @NotNull
     private Date startDate;
+    @Column(name = "start_price")
+    @NotNull
+    private double startPrice;
+
 
     public Purchase() { }
 
@@ -51,5 +55,13 @@ public class Purchase {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public Double getStartPrice() {
+        return startPrice;
+    }
+
+    public void setStartPrice(Double startPrice) {
+        this.startPrice = startPrice;
     }
 }

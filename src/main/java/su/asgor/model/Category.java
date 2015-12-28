@@ -1,4 +1,4 @@
-package ru.kasuhanov.model;
+package su.asgor.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

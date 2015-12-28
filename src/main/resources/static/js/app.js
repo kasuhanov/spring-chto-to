@@ -2,8 +2,8 @@ var app =angular.module('app', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
-            //templateUrl : 'pages/list.html',
-            controller  : 'userController'
+            templateUrl : 'pages/purchase_list.html',
+            controller  : 'purchaseListController'
         })
         .when('/category/:id', {
             templateUrl : 'pages/purchase_list.html',
@@ -22,7 +22,10 @@ app.controller('CategoryController', function($scope, $http) {
     });
 });
 app.controller('purchaseListController', function($scope, $http, $routeParams) {
-    $http.get('/category/getpurchases?id='+$routeParams.id).
+    var url='/purchase/getall';
+    if($routeParams.id != undefined )
+        url='/category/getpurchases?id='+$routeParams.id;
+    $http.get(url).
     success(function(data) {
         $scope.purchases = data;
     });

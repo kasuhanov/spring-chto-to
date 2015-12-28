@@ -1,4 +1,4 @@
-package ru.kasuhanov;
+package su.asgor;
 
 
 import org.springframework.boot.SpringApplication;

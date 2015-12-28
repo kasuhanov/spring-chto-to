@@ -1,8 +1,8 @@
-package ru.kasuhanov.Dao;
+package su.asgor.Dao;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import ru.kasuhanov.model.Category;
+import su.asgor.model.Category;
 
 import javax.transaction.Transactional;
 
