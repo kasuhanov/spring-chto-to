@@ -11,5 +11,10 @@
 </head>
 <body>
     <div data-ng-view></div>
+    <div data-ng-controller="CategoryController">
+        <ul>
+            <li data-ng-repeat="category in categories">{{category.name}}</li>
+        </ul>
+    </div>
 </body>
 </html>

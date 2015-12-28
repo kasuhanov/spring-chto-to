@@ -7,8 +7,8 @@ import javax.validation.constraints.NotNull;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="my_entity_seq_gen")
-    @SequenceGenerator(name="my_entity_seq_gen", sequenceName="users_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="user_seq_gen")
+    @SequenceGenerator(name="user_seq_gen", sequenceName="users_seq")
     private long id;
 
     @NotNull

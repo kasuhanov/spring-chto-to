@@ -14,11 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserRepository repository;
 
-    @RequestMapping(value = "/users",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/getall",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public List<User> findAll() {
         List<User> users = new ArrayList<>();

@@ -25,25 +25,31 @@ app.controller('userController', function($scope, $http) {
     $scope.numberOfPages=function(){
         return Math.ceil($scope.users.length/$scope.pageSize);
     };
-    $http.get('/users').
+    $http.get('/user/getall').
     success(function(data) {
         $scope.users = data;
     });
     $scope.destroy = function(id) {
-        $http.delete('/delete?id='+id).
+        $http.delete('/user/delete?id='+id).
         success(function() {
-            $http.get('/users').
+            $http.get('/user/getall').
             success(function(data) {
                 $scope.users = data;
             });
         });
     };
 });
+app.controller('CategoryController', function($scope, $http) {
+    $http.get('/category/getall').
+    success(function(data) {
+        $scope.categories = data;
+    });
+});
 app.controller('newController', function($scope, $http, $location) {
     $scope.title = "New User";
     $scope.user = {name: "",email:""};
     $scope.save = function() {
-        $http.post('/create?name='+$scope.user.name+'&email='+$scope.user.email+'&age='+$scope.user.age).
+        $http.post('/user/create?name='+$scope.user.name+'&email='+$scope.user.email+'&age='+$scope.user.age).
             success(function(){
             $location.path("/");
         });
@@ -51,12 +57,12 @@ app.controller('newController', function($scope, $http, $location) {
 });
 app.controller('editController', function($scope, $http, $location, $routeParams) {
     $scope.title = "Edit user";
-    $http.get('/getbyid?id='+$routeParams.id).
+    $http.get('/user/getbyid?id='+$routeParams.id).
     success(function(data) {
         $scope.user = data;
     });
     $scope.save = function() {
-        $http.post('/update?id='+$scope.user.id+'&name='+$scope.user.name+'&email='+$scope.user.email+'&age='+$scope.user.age).
+        $http.post('/user/update?id='+$scope.user.id+'&name='+$scope.user.name+'&email='+$scope.user.email+'&age='+$scope.user.age).
         success(function(){
             $location.path("/");
         });
