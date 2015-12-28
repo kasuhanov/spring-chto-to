@@ -6,36 +6,36 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ru.kasuhanov.Dao.CategoryRepository;
-import ru.kasuhanov.model.Category;
+import ru.kasuhanov.Dao.PurchaseRepository;
 import ru.kasuhanov.model.Purchase;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/category")
-public class CategoryController {
+@RequestMapping("/purchase")
+public class PurchaseController {
     @Autowired
-    private CategoryRepository repository;
+    private PurchaseRepository repository;
 
     @RequestMapping(value = "/getall",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public List<Category> findAll() {
-        List<Category> categories = new ArrayList<>();
-        repository.findAll().forEach(categories::add);
-        return categories;
+    public List<Purchase> findAll() {
+        List<Purchase> purchases = new ArrayList<>();
+        repository.findAll().forEach(purchases::add);
+        return purchases;
     }
-    @RequestMapping(value = "/getpurchases",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/getbyid",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public List<Purchase> getPurchases(long id) {
-        return repository.findOne(id).getPurchases();
+    public Purchase getbyid(long id) {
+        return repository.findOne(id);
     }
     @RequestMapping(value = "/create",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public Category create(String name) {
-        Category category = new Category(name);
-        repository.save(category);
-        return category;
+    public Purchase create(String name,Date date) {
+        Purchase purchase = new Purchase(name,date);
+        repository.save(purchase);
+        return purchase;
     }
 }
