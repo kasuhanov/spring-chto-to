@@ -1,7 +1,18 @@
 <div class="container">
-    <ul>
-        <li data-ng-repeat="purchase in purchases">
-            <a href="#/purchase/{{purchase.id}}">{{purchase.name}}</a>
-        </li>
-    </ul>
+    <table id="purchase_table" class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Start date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="purchase in purchases">
+            <th>{{purchase.id}}</th>
+            <th><a href="#/purchase/{{purchase.id}}">{{purchase.name}}</a></th>
+            <th>{{purchase.startDate}}</th>
+        </tr>
+        </tbody>
+    </table>
 </div>
