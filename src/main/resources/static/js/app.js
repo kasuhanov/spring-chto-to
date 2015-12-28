@@ -2,18 +2,16 @@ var app =angular.module('app', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl : 'pages/list.html',
+            //templateUrl : 'pages/list.html',
             controller  : 'userController'
         })
-        .when('/new', {
-            templateUrl : 'pages/edit.html',
-            controller  : 'newController'
-        })
-        .when('/edit/:id', {
-            templateUrl : 'pages/edit.html',
-            controller  : 'editController'
-        })
         .otherwise({redirectTo: "/"});
+});
+app.controller('CategoryController', function($scope, $http) {
+    $http.get('/category/getall').
+    success(function(data) {
+        $scope.categories = data;
+    });
 });
 app.controller('userController', function($scope, $http) {
     $scope.ord = 'name';
@@ -39,12 +37,6 @@ app.controller('userController', function($scope, $http) {
         });
     };
 });
-app.controller('CategoryController', function($scope, $http) {
-    $http.get('/category/getall').
-    success(function(data) {
-        $scope.categories = data;
-    });
-});
 app.controller('newController', function($scope, $http, $location) {
     $scope.title = "New User";
     $scope.user = {name: "",email:""};
@@ -66,11 +58,5 @@ app.controller('editController', function($scope, $http, $location, $routeParams
         success(function(){
             $location.path("/");
         });
-    }
-});
-app.filter('startFrom', function() {
-    return function(input, start) {
-        start = +start; //parse to int
-        return input.slice(start);
     }
 });
