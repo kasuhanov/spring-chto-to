@@ -19,7 +19,8 @@ public class Category {
             inverseJoinColumns = { @JoinColumn(name = "purchase_id",
                     nullable = false, updatable = false) })
     private List<Purchase> purchases;
-
+    @Transient
+    public int purchaseCount;
     public Category() { }
 
     public Category(long id) {
@@ -52,5 +53,9 @@ public class Category {
 
     public void setPurchases(List<Purchase> purchases) {
         this.purchases = purchases;
+    }
+
+    public void setupCount() {
+        this.purchaseCount = getPurchases().size();
     }
 }

@@ -21,7 +21,9 @@ public class CategoryController {
     @RequestMapping(value = "/getall",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public Iterable<Category> findAll() {
-        return repository.findAll();
+        Iterable<Category> categories = repository.findAll();
+        categories.forEach(Category::setupCount);
+        return categories;
     }
     @RequestMapping(value = "/getpurchases",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
