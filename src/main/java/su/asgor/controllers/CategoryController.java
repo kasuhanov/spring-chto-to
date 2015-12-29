@@ -1,6 +1,9 @@
 package su.asgor.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import su.asgor.Dao.CategoryRepository;
+import su.asgor.Dao.PurchaseRepository;
 import su.asgor.model.Category;
 import su.asgor.model.Purchase;
 
@@ -18,6 +22,8 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     private CategoryRepository repository;
+    @Autowired
+    private PurchaseRepository purchaseRepository;
 
     @RequestMapping(value = "/getall",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
@@ -33,7 +39,8 @@ public class CategoryController {
     }
     @RequestMapping(value = "/{id}/purchases",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public List<Purchase> getPagedPurchases(@PathVariable long id, int page, int pageSize) {
-        return repository.findOne(id).getPurchases().subList(page*pageSize,(page+1)*pageSize);
+    public Page<Purchase> getPagedPurchases(@PathVariable long id, int page, int pageSize) {
+        Pageable pageable = new PageRequest(page, pageSize);
+        return purchaseRepository.findByCategories(repository.findOne(id),pageable);
     }
 }
