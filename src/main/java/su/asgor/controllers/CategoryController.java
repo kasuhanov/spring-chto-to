@@ -3,6 +3,7 @@ package su.asgor.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,5 +30,10 @@ public class CategoryController {
     @ResponseBody
     public List<Purchase> getPurchases(long id) {
         return repository.findOne(id).getPurchases();
+    }
+    @RequestMapping(value = "/{id}/purchases",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public List<Purchase> getPagedPurchases(@PathVariable long id, int page, int pageSize) {
+        return repository.findOne(id).getPurchases().subList(page*pageSize,(page+1)*pageSize);
     }
 }

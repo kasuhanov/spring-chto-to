@@ -1,5 +1,7 @@
 package su.asgor.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Category {
             @JoinColumn(name = "category_id", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "purchase_id",
                     nullable = false, updatable = false) })
+    @JsonManagedReference
     private List<Purchase> purchases;
     @Transient
     public int purchaseCount;

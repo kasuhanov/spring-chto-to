@@ -1,8 +1,11 @@
 package su.asgor.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "purchase")
@@ -21,6 +24,9 @@ public class Purchase {
     @NotNull
     private double startPrice;
 
+    @ManyToMany(mappedBy="purchases")
+    @JsonBackReference
+    private List<Category> categories;
 
     public Purchase() { }
 
@@ -63,5 +69,13 @@ public class Purchase {
 
     public void setStartPrice(Double startPrice) {
         this.startPrice = startPrice;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 }
