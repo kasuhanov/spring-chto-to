@@ -23,10 +23,13 @@ public class Purchase {
     @Column(name = "start_price")
     @NotNull
     private double startPrice;
-
     @ManyToMany(mappedBy="purchases")
     @JsonBackReference
     private List<Category> categories;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    //@JsonBackReference
+    private Customer customer;
 
     public Purchase() { }
 
@@ -34,10 +37,11 @@ public class Purchase {
         this.id = id;
     }
 
-    public Purchase(String name, Date startDate, double startPrice) {
+    public Purchase(String name, Date startDate, double startPrice,Customer customer) {
         this.name = name;
         this.startDate = startDate;
         this.startPrice = startPrice;
+        this.customer=customer;
     }
 
     public long getId() {
@@ -78,5 +82,13 @@ public class Purchase {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

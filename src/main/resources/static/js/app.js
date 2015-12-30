@@ -14,6 +14,10 @@ app.config(function($routeProvider) {
             templateUrl : 'pages/purchase_detail.html',
             controller  : 'purchaseDetailController'
         })
+        .when('/customer/:id', {
+            templateUrl : 'pages/customer_detail.html',
+            controller  : 'customerDetailController'
+        })
         .otherwise({redirectTo: "/"});
 });
 app.controller('CategoryController', function($scope, $http) {
@@ -46,5 +50,11 @@ app.controller('purchaseDetailController', function($scope, $http, $routeParams)
     $http.get('/purchase/get/'+$routeParams.id).
     success(function(data) {
         $scope.purchase = data;
+    });
+});
+app.controller('customerDetailController', function($scope, $http, $routeParams){
+    $http.get('/customer/get/'+$routeParams.id).
+    success(function(data) {
+        $scope.customer = data;
     });
 });
