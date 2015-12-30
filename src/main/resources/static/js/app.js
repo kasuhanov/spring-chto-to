@@ -24,14 +24,16 @@ app.controller('CategoryController', function($scope, $http) {
 });
 app.controller('purchaseListController', function($scope, $http, $routeParams) {
     $scope.pageSize = 5;
-    var url='/purchase/getpage?pageSize='+$scope.pageSize;
-    if($routeParams.id != undefined )url='/category/'+$routeParams.id+'/purchases?pageSize='+$scope.pageSize;
-    $scope.totalItems = 100;
+    $scope.totalItems = 0;
     $scope.currentPage = 1;
+    var url='/purchase/getpage?pageSize='+$scope.pageSize;
+    if($routeParams.id != undefined ) {
+        url = '/category/' + $routeParams.id + '/purchases?pageSize=' + $scope.pageSize;
+    }
     getPage($scope.currentPage);
     $scope.pageChanged = function(){
         getPage($scope.currentPage);
-    }
+    };
     function getPage(page){
         $http.get(url+'&page='+(page-1)).
         success(function(data) {
