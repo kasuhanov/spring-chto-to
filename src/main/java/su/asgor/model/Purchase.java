@@ -34,9 +34,10 @@ public class Purchase {
         this.id = id;
     }
 
-    public Purchase(String name, Date startDate) {
+    public Purchase(String name, Date startDate, double startPrice) {
         this.name = name;
         this.startDate = startDate;
+        this.startPrice = startPrice;
     }
 
     public long getId() {
@@ -63,11 +64,11 @@ public class Purchase {
         this.startDate = startDate;
     }
 
-    public Double getStartPrice() {
+    public double getStartPrice() {
         return startPrice;
     }
 
-    public void setStartPrice(Double startPrice) {
+    public void setStartPrice(double startPrice) {
         this.startPrice = startPrice;
     }
 
