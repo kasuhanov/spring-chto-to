@@ -27,7 +27,7 @@ public class PurchaseController {
     @ResponseBody
     public Page<Purchase> getPage(int page, int pageSize) {
         Pageable pageable = new PageRequest(page, pageSize);
-        return repository.findAll(pageable);
+        return repository.findAllByOrderById(pageable);
     }
     @RequestMapping(value = "/get/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody

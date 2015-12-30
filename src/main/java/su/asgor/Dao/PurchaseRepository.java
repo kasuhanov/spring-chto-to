@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface PurchaseRepository extends PagingAndSortingRepository<Purchase, Long> {
+    Page<Purchase> findByCategories(Category category, Pageable pageable);
+    Page<Purchase> findAllByOrderById(Pageable pageable);
 
-    public abstract Page<Purchase> findByCategories(Category category, Pageable pageable);
 }
