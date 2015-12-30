@@ -28,7 +28,6 @@ public class Purchase {
     private List<Category> categories;
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
-    //@JsonBackReference
     private Customer customer;
 
     public Purchase() { }

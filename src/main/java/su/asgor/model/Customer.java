@@ -17,7 +17,6 @@ public class Customer {
     @NotNull
     private String name;
     @OneToMany(mappedBy = "customer")
-    //@JsonManagedReference
     private List<Purchase> purchases;
     public Customer() { }
 
