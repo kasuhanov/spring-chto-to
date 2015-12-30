@@ -8,6 +8,6 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public abstract class CategoryRepository implements PagingAndSortingRepository<Category, Long> {
+public interface CategoryRepository extends PagingAndSortingRepository<Category, Long> {
 
 }
