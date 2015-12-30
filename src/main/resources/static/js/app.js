@@ -47,14 +47,29 @@ app.controller('purchaseListController', function($scope, $http, $routeParams) {
     }
 });
 app.controller('purchaseDetailController', function($scope, $http, $routeParams) {
-    $http.get('/purchase/get/'+$routeParams.id).
+    $http.get('/purchase/'+$routeParams.id).
     success(function(data) {
         $scope.purchase = data;
     });
 });
 app.controller('customerDetailController', function($scope, $http, $routeParams){
-    $http.get('/customer/get/'+$routeParams.id).
+    $http.get('/customer/'+$routeParams.id).
     success(function(data) {
         $scope.customer = data;
+        $scope.pageSize = 5;
+        $scope.totalItems = 0;
+        $scope.currentPage = 1;
+        var url='/customer/'+$routeParams.id+'/purchases?pageSize='+$scope.pageSize;
+        getPage($scope.currentPage);
+        $scope.pageChanged = function(){
+            getPage($scope.currentPage);
+        };
+        function getPage(page){
+            $http.get(url+'&page='+(page-1)).
+            success(function(data) {
+                $scope.purchases = data.content;
+                $scope.totalItems = data.totalElements;
+            });
+        }
     });
 });

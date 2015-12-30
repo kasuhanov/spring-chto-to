@@ -29,7 +29,7 @@ public class PurchaseController {
         Pageable pageable = new PageRequest(page, pageSize);
         return repository.findAllByOrderById(pageable);
     }
-    @RequestMapping(value = "/get/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public Purchase getbyid(@PathVariable long id) {
         return repository.findOne(id);
