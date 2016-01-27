@@ -16,6 +16,9 @@ public class Customer {
     private long id;
     @NotNull
     private String name;
+    private String email;
+    private String phone;
+    private String postalAddress;
     @OneToMany(mappedBy = "customer")
     private List<Purchase> purchases;
     public Customer() { }
@@ -51,4 +54,28 @@ public class Customer {
     public void setPurchases(List<Purchase> purchases) {
         this.purchases = purchases;
     }
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getPostalAddress() {
+		return postalAddress;
+	}
+
+	public void setPostalAddress(String postalAddress) {
+		this.postalAddress = postalAddress;
+	}
 }

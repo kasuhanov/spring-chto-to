@@ -16,10 +16,10 @@ public class Purchase {
     private long id;
     @NotNull
     private String name;
-    @Column(name = "start_time")
+    @Column(name = "submission_close_date")
     @Temporal(TemporalType.DATE)
     @NotNull
-    private Date startDate;
+    private Date submissionCloseDate;
     @Column(name = "start_price")
     @NotNull
     private double startPrice;
@@ -36,9 +36,9 @@ public class Purchase {
         this.id = id;
     }
 
-    public Purchase(String name, Date startDate, double startPrice,Customer customer) {
+    public Purchase(String name, Date submissionCloseDate, double startPrice, Customer customer) {
         this.name = name;
-        this.startDate = startDate;
+        this.submissionCloseDate = submissionCloseDate;
         this.startPrice = startPrice;
         this.customer=customer;
     }
@@ -59,12 +59,12 @@ public class Purchase {
         this.name = value;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getSubmissionCloseDate() {
+        return submissionCloseDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setSubmissionCloseDate(Date submissionCloseDate) {
+        this.submissionCloseDate = submissionCloseDate;
     }
 
     public double getStartPrice() {

@@ -1,6 +1,6 @@
-<div>
-            <p>Name: {{purchase.name}}</p>
-            <p>Start date: {{purchase.startDate}}</p>
-            <p>Start price: {{purchase.startPrice}}</p>
-            <p>Customer: <a href="#/customer/{{purchase.customer.id}}">{{purchase.customer.name}}</a></p>
+<div class="detail col-md-7">
+    <h3>{{purchase.name}}</h3>
+    <p>Дата окончания подачи заявок: {{purchase.submissionCloseDate}}</p>
+    <p>Максимальная начальная цена: {{purchase.startPrice}} руб.</p>
+    <p>Заказчик: <a href="#/customer/{{purchase.customer.id}}">{{purchase.customer.name}}</a></p>
 </div>

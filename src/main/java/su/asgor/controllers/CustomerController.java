@@ -6,12 +6,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import su.asgor.Dao.CustomerRepository;
-import su.asgor.Dao.PurchaseRepository;
+import org.springframework.web.bind.annotation.*;
+import su.asgor.dao.CustomerRepository;
+import su.asgor.dao.PurchaseRepository;
 import su.asgor.model.Customer;
 import su.asgor.model.Purchase;
 
@@ -29,7 +26,8 @@ public class CustomerController {
     }
     @RequestMapping(value = "/{id}/purchases",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public Page<Purchase> getPurchases(@PathVariable long id, int page, int pageSize) {
+    public Page<Purchase> getPurchasesPage(@PathVariable long id, @RequestParam(required = true) int page,
+    		@RequestParam(required = true) int pageSize) {
         Pageable pageable = new PageRequest(page, pageSize);
         return purchaseRepository.findByCustomer(repository.findOne(id),pageable);
     }

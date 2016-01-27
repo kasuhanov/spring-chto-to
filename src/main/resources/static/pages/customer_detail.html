@@ -1,25 +1,14 @@
-<div>
-    <p>Name: {{customer.name}}</p>
-    <p>Purchases:</p>
-    <div>
-        <table id="purchase_table" class="table table-striped">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Start price</th>
-                <th>Start date</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr data-ng-repeat="purchase in purchases">
-                <th>{{purchase.id}}</th>
-                <th><a href="#/purchase/{{purchase.id}}">{{purchase.name}}</a></th>
-                <th>{{purchase.startPrice}}</th>
-                <th>{{purchase.startDate}}</th>
-            </tr>
-            </tbody>
-        </table>
-        <uib-pagination boundary-links="true" max-size="10" total-items="totalItems" rotate="false" items-per-page="pageSize" ng-model="currentPage"  ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
+<div class="detail col-md-7">
+    <h3>{{customer.name}}</h3>
+    <div id="contact_info">
+    	<h4>Контактная информация</h4>
+	    <label ng-show="customer.email">Электронный адрес:</label>
+	    <p>{{customer.email}}</p>
+	    <label ng-show="customer.phone">Телефон:</label>
+	    <p>{{customer.phone}}</p>
+	    <label ng-show="customer.postalAddress">Почтовый Адрес:</label>
+	    <p>{{customer.postalAddress}}</p>
     </div>
+    <h4>Закупки:</h4>
+	<div purchases></div>
 </div>

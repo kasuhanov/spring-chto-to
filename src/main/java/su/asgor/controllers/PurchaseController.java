@@ -6,11 +6,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import su.asgor.Dao.PurchaseRepository;
+import org.springframework.web.bind.annotation.*;
+import su.asgor.dao.PurchaseRepository;
 import su.asgor.model.Purchase;
 
 @Controller
@@ -18,20 +15,21 @@ import su.asgor.model.Purchase;
 public class PurchaseController {
     @Autowired
     private PurchaseRepository repository;
-    @RequestMapping(value = "/getall",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/all",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public Iterable<Purchase> findAll() {
+    public Iterable<Purchase> getAll() {
         return repository.findAll();
     }
-    @RequestMapping(value = "/getpage",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/page",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public Page<Purchase> getPage(int page, int pageSize) {
+    public Page<Purchase> getPurchasesPage(@RequestParam(required = true) int page,
+    		@RequestParam(required = true) int pageSize){
         Pageable pageable = new PageRequest(page, pageSize);
         return repository.findAllByOrderById(pageable);
     }
     @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public Purchase getbyid(@PathVariable long id) {
+    public Purchase getPurchase(@PathVariable long id) {
         return repository.findOne(id);
     }
 }
