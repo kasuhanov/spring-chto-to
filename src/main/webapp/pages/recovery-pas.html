@@ -1,0 +1,31 @@
+<div class="detail">
+    <h3>Восстановление пароля</h3>
+     <form class="form-inline" id="search_form" name="recoverForm" ng-submit="recover()">
+		<div ng-class="{ 'has-error': recoverForm.password.$touched && recoverForm.password.$invalid }">
+			<label>Новый пароль</label><br/>
+			<input class="form-control" name="password" type="password" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required/>
+			<div class="help-block" ng-messages="recoverForm.password.$error" ng-if="recoverForm.password.$touched">
+	        	<p ng-message="required">Это поле обязательное.</p>
+	        	<p ng-message="minlength">Пароль должен быть не меньше 5 символов.</p>
+	        	<p ng-message="minlength">Слишком длинный пароль.</p>
+      		</div>			
+		</div>
+		<div ng-show="user.password" ng-class="{ 'has-error': recoverForm.confirmPassword.$touched && recoverForm.confirmPassword.$invalid }">
+			<label>Введите пароль еще раз</label><br/>
+			<input class="form-control" name="confirmPassword" type="password" ng-model="user.confirmPassword" compare-to="user.password" required/>
+			<div class="help-block" ng-messages="recoverForm.confirmPassword.$error" ng-if="recoverForm.confirmPassword.$touched">
+	        	<p ng-message="required">Это поле обязательное.</p>
+				<p ng-message="compareTo">Пароли должны совпадать.</p>
+      		</div>	
+		</div>       
+		<br/>
+    	<input class="btn btn-default" type="submit" value="Восстановить" ng-disabled="recoverForm.$invalid"/>
+    	<div class="help-block" style="color:#a94442;">
+    		<p ng-show="success" style="color:green">Пароль успешно восстановлен</p>
+    		<p ng-show="timeout">Время восстановления пароля истекло.</p>
+    		<button ng-show="timeout" class="btn btn-default" ng-click="resend()">Переотправить письмо для восстановления</button>
+    		<p ng-show="failed">При обработке запроса произошла ошибка.</p>
+    		<p ng-show="sendSuccess" style="color:green">Письмо отправлено</p>
+    	</div>	
+	</form>
+</div>

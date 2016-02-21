@@ -1,4 +1,4 @@
-package su.asgor.Dao;
+package su.asgor.dao;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

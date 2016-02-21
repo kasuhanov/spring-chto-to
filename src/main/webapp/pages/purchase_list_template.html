@@ -1,0 +1,23 @@
+<div>
+    <table id="purchase_table" class="table table-striped">
+        <thead>
+        <tr>
+            <th class="col-md-2">ID</th>
+            <th class="col-md-7">Наименование</th>
+            <th class="col-md-2">Начальная цена</th>
+            <th class="col-md-2">Окончание подачи заявок</th>
+            <th class="col-md-1">Тип</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="purchase in purchases">
+            <th>{{purchase.id}}</th>
+            <th><a href="#/purchase/{{purchase.id}}">{{purchase.name}}</a></th>
+            <th>{{purchase.startPrice}}  {{purchase.lots[0].currency}}</th>
+            <th>{{purchase.submissionCloseDate}}</th>
+            <th>{{purchase.type}}</th>
+        </tr>
+        </tbody>
+    </table>
+    <div uib-pagination id="pagination" boundary-links="true" max-size="7" total-items="totalItems" items-per-page="pageSize" ng-model="currentPage"  ng-change="pageChanged()" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></div>
+</div>

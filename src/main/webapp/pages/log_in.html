@@ -1,0 +1,25 @@
+<div class="small-block" id="log_in">
+    <form ng-controller="LoginController" name="logInForm" ng-submit="login()">
+        <div class="form-group">
+            <label>Авторизация</label>
+            <div ng-class="{ 'has-error': logInForm.email.$touched && logInForm.email.$invalid }">
+            	<input class="form-control" type="email" placeholder="Почтовый ящик" ng-model="user.email" name="email" required/>
+				<div class="help-block" ng-messages="logInForm.email.$error" ng-if="logInForm.email.$touched">
+	        		<p ng-message="required">Это поле обязательное.</p>
+	        		<p ng-message="email">Некорректный электронный адрес.</p>
+      			</div>            
+            </div>	
+            <br ng-hide="logInForm.email.$error&&logInForm.email.$touched"/>
+            <div ng-class="{ 'has-error': logInForm.password.$touched &&logInForm.password.$invalid }">
+            	<input class="form-control" type="password" placeholder="Пароль" ng-model="user.password" name="password" required/>
+            	<div class="help-block" ng-messages="logInForm.password.$error" ng-if="logInForm.password.$touched">
+	        		<p ng-message="required">Это поле обязательное.</p>
+      			</div>
+            </div>
+        </div>
+        <p style="color:#a94442;" ng-show="failed">Неудалось авторизоваться!</p>
+        <input class="btn btn-default" type="submit" value="Войти" ng-disabled="logInForm.$invalid"/>
+        <div><a href="#/registration/">Регистрация</a></div>
+        <div><a href="#/recovery/">Забыли пароль?</a></div>
+    </form>
+</div>

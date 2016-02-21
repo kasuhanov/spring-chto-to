@@ -1,5 +1,7 @@
 package su.asgor.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -8,6 +10,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "category")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(value = "purchases")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator="categoty_seq_gen")
@@ -58,7 +62,8 @@ public class Category {
         this.purchases = purchases;
     }
 
-    public void setupCount() {
+    public Category setupCount() {
         this.purchaseCount = getPurchases().size();
+        return this;
     }
 }

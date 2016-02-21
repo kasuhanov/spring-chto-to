@@ -1,0 +1,85 @@
+<div class="detail">
+    <h3>{{purchase.name}}</h3>
+    <p>Тип: {{purchase.purchaseCodeName}}</p>
+    <p ng-show="purchase.completed">Завершенная</p>
+    <p ng-show="!purchase.completed">Незавершенная</p>
+    <p ng-show="purchase.submissionCloseDate">Дата окончания подачи заявок: {{purchase.submissionCloseDate}}</p>
+    <p ng-show="purchase.startPrice">Начальная максимальная цена: {{purchase.startPrice}} {{purchase.lots[0].currency}}</p>
+    <p ng-show="purchase.auctionTime">Дата проведения аукциона: {{purchase.auctionTime}}</p>
+    <p ng-show="purchase.auctionPlace">Дата проведения аукциона: {{purchase.auctionPlace}}</p>
+    <p ng-show="purchase.electronicPlaceName">
+    	Наименование ЭТП: 
+    	<a href="{{purchase.electronicPlaceUrl}}" target="_blank">{{purchase.electronicPlaceName}}</a>
+    </p>
+    <p ng-show="purchase.quotationExaminationTime">Время рассмотрения заявок: {{purchase.quotationExaminationTime}}</p>
+    <p ng-show="purchase.quotationExaminationPlace">Место рассмотрения заявок: {{purchase.quotationExaminationPlace}}</p>
+    <p ng-show="purchase.envelopeOpeningTime">Дата вскрытия конвертов: {{purchase.envelopeOpeningTime}}</p>
+    <p ng-show="purchase.envelopeOpeningPlace">Место вскрытия конвертов: {{purchase.envelopeOpeningPlace}}</p>
+    <p ng-show="purchase.examinationDateTime">Дата рассмотрения заявок: {{purchase.examinationDateTime}}</p>
+    <p ng-show="purchase.examinationPlace">Место рассмотрения заявок: {{purchase.examinationPlace}}</p>
+    <p ng-show="purchase.summingupTime">Дата подведения итогов: {{purchase.summingupTime}}</p>
+    <p ng-show="purchase.summingupPlace">Место подведения итогов: {{purchase.summingupPlace}}</p>
+    <p>Заказчик: <a href="#/customer/{{purchase.customer.id}}">{{purchase.customer.name}}</a></p>
+    <div ng-show="purchase.lots.length">
+    	<h4>Предмет контракта</h4>
+    	<div ng-repeat="lot in purchase.lots">
+    		<p ng-show="lot.name">Наименование: {{lot.name}}</p>
+    		<p ng-show="lot.startPrice">Начальная максимальная цена: {{lot.startPrice}} {{lot.currency}}</p>
+    		<p ng-show="lot.address">Место поставки: {{lot.address}}</p>
+    		<p>Для СМП: <span ng-show="lot.forSMP">Да</span><span ng-show="!lot.forSMP">Нет</span></p>
+    	</div>
+    </div>
+    <div ng-show="purchase.lots.length">
+    	<h4>Позиции договора:</h4>
+    	<div>
+			<table class="table table-striped">
+				<thead>
+			        <tr>
+			        	<th class="col-md-1">№ п/п</th>
+			            <th class="col-md-4">Наименование</th>
+			            <th class="col-md-1">ОКДП</th>
+			            <th class="col-md-1">ОКВЭД</th>
+			            <th class="col-md-1">Количество</th>
+			            <th class="col-md-1">Ед. изм.</th>
+			            <th class="col-md-3">Доп. информация</th>
+			        </tr>
+			 	</thead>
+			    <tbody ng-repeat="lot in purchase.lots">
+			        <tr ng-repeat="lotItem in lot.lotItems">
+			            <th>{{lotItem.ordinalNumber}}</th>
+			            <th>{{lot.name}}</th>
+			            <th>{{lotItem.codeOkdp}}</th>
+			            <th>{{lotItem.codeOkved}}</th>
+			            <th>{{lotItem.qty}}</th>
+			            <th>{{lotItem.okeiName}}</th>
+			            <th>{{lotItem.additionalInfo}}</th>
+			        </tr>
+			    </tbody>
+			</table>
+    	</div>
+    </div>	
+    <div>
+    	<h4>Контактная информация:</h4>
+    	<p ng-show="purchase.contactLastName">Контактное лицо: {{purchase.contactLastName}} {{purchase.contactFirstName}}  {{purchase.contactMiddleName}}</p>
+    	<p ng-show="purchase.contactPhone">Телефон: {{purchase.contactPhone}}</p>
+    	<p ng-show="purchase.contactEmail">
+    		Адрес электронной почты: 
+    		<span ng-bind-html="purchase.contactEmail | linky:'_blank'"></span>
+    	</p>
+    </div>
+    <div ng-show="purchase.document.length">
+    	<h4>Документация:</h4>
+    	<p ng-show="purchase.documentationDeliveryPlace">
+    		Место предоставления документации: 
+    		<span ng-bind-html="purchase.documentationDeliveryPlace | linky:'_blank'"></span>
+    	 </p>
+    	<p ng-show="purchase.documentationDeliveryProcedure">
+    		Процедура предоставления документации: 
+    		<span ng-bind-html="purchase.documentationDeliveryProcedure | linky:'_blank'"></span>
+    	</p>
+    	<ul>
+    		<li ng-repeat="document in purchase.document"><a href="{{document.url}}" target="_blank">{{document.name}}</a></li>
+    	</ul>
+    </div>
+    <a ng-show="purchase.urlOOS" href="{{purchase.urlOOS}}" target="_blank">Извещение на официальном сайте</a>
+</div>

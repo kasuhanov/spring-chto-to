@@ -1,0 +1,20 @@
+<div class="detail">
+    <h3>Восстановление пароля</h3>
+     <form class="form-inline" id="search_form" name="recoverForm" ng-submit="recover()">
+		<div ng-class="{ 'has-error': recoverForm.email.$touched && recoverForm.email.$invalid }">
+			<label>Адрес электронной почты</label><br/>
+			<input class="form-control" type="email" name="email" ng-model="user.email" required/>
+            <div class="help-block" ng-messages="recoverForm.email.$error" ng-if="recoverForm.email.$touched">
+	        	<p ng-message="required">Это поле обязательное.</p>
+	        	<p ng-message="email">Некорректный электронный адрес.</p>
+      		</div>
+		</div>        
+		<br/>
+    	<input class="btn btn-default" type="submit" value="Восстановить" ng-disabled="recoverForm.$invalid"/>
+    	<div class="help-block" style="color:#a94442;">
+    		<p ng-show="noSuchEmail">Пользователь с данным электронным адресом не зарегистрирован!</p>
+    		<p ng-show="failed">При обработке запроса произошла ошибка.</p>
+    		<p ng-show="success" style="color:green">Подтвердите регистрацию.</p>
+    	</div>	
+	</form>
+</div>

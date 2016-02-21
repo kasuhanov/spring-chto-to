@@ -1,0 +1,43 @@
+<div class="detail">
+    <h3>Регистрация в системе</h3>
+     <form class="form-inline" id="search_form" name="registrationForm" ng-submit="registrate()">
+		<div ng-class="{ 'has-error': registrationForm.email.$touched && registrationForm.email.$invalid }">
+			<label>Адрес электронной почты</label><br/>
+			<input class="form-control" type="email" name="email" ng-model="user.email" required/>
+            <div class="help-block" ng-messages="registrationForm.email.$error" ng-if="registrationForm.email.$touched">
+	        	<p ng-message="required">Это поле обязательное.</p>
+	        	<p ng-message="email">Некорректный электронный адрес.</p>
+      		</div>
+		</div>        
+		<div ng-class="{ 'has-error': registrationForm.password.$touched && registrationForm.password.$invalid }">
+			<label>Пароль</label><br/>
+			<input class="form-control" name="password" type="password" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required/>
+			<div class="help-block" ng-messages="registrationForm.password.$error" ng-if="registrationForm.password.$touched">
+	        	<p ng-message="required">Это поле обязательное.</p>
+	        	<p ng-message="minlength">Пароль должен быть не меньше 5 символов.</p>
+	        	<p ng-message="minlength">Слишком длинный пароль.</p>
+      		</div>			
+		</div>
+		<div ng-show="user.password" ng-class="{ 'has-error': registrationForm.confirmPassword.$touched && registrationForm.confirmPassword.$invalid }">
+			<label>Введите пароль еще раз</label><br/>
+			<input class="form-control" name="confirmPassword" type="password" ng-model="user.confirmPassword" compare-to="user.password" required/>
+			<div class="help-block" ng-messages="registrationForm.confirmPassword.$error" ng-if="registrationForm.confirmPassword.$touched">
+	        	<p ng-message="required">Это поле обязательное.</p>
+				<p ng-message="compareTo">Пароли должны совпадать.</p>
+      		</div>	
+		</div>
+		<!--
+		<div ng-show="((user.confirmPassword==user.password)&&(user.confirmPassword!=''))">
+			<label>Капча</label><br/>
+			<input class="form-control" type="password" ng-model="user.captcha"/>
+		</div>
+		  -->
+		<br/>
+    	<input class="btn btn-default" type="submit" value="Зарегестрироваться" ng-disabled="registrationForm.$invalid"/>
+    	<div class="help-block" style="color:#a94442;">
+    		<p ng-show="emailExists">Пользователь с данным электронным адресом уже зарегестрирован!</p>
+    		<p ng-show="failed">Сервер не отвечает.</p>
+    		<p ng-show="success" style="color:green">Подтвердите регистрацию.</p>
+    	</div>	
+	</form>
+</div>
